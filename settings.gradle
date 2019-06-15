@@ -1,0 +1,5 @@
+rootProject.name = 'mastermind'
+include 'mastermind-persistence'
+include 'mastermind-business'
+include 'mastermind-api'
+

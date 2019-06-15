@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group 'com.test.mastermind'
+version '1.0.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+    compile group: 'org.springframework.boot', name: 'spring-boot-devtools'
+    compile project(':mastermind-business')
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+
+}
