@@ -3,6 +3,7 @@ package com.test.buttons.service;
 import com.test.buttons.dto.FeedbackCodeDTO;
 import com.test.buttons.dto.GameDTO;
 import com.test.buttons.dto.CheckCodeDTO;
+import com.test.buttons.exception.EntityNotFoundException;
 
 public interface IGameService {
 
@@ -18,7 +19,7 @@ public interface IGameService {
      * @param id
      * @return GameDTO
      */
-    GameDTO getGame(String id);
+    GameDTO getGame(String id) throws EntityNotFoundException;
 
 
     /**

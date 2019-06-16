@@ -53,4 +53,15 @@ public enum Colour
 
         return flagList;
     }
+
+    public static Boolean isResolved(List<String> flagList) {
+
+        if(flagList.size() < 4 ) return false;
+
+        for(String flag : flagList) {
+            if(flag.equals(WHITE_FLAG))
+                return false;
+        }
+        return true;
+    }
 }
