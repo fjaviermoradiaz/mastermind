@@ -3,6 +3,7 @@ package com.test.buttons.controller;
 import com.test.buttons.dto.GameDTO;
 import com.test.buttons.dto.CheckCodeDTO;
 import com.test.buttons.dto.FeedbackCodeDTO;
+import com.test.buttons.exception.EntityNotFoundException;
 import com.test.buttons.service.GameService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class GameController {
 
     @GetMapping(value = "/{id}")
     @ResponseBody
-    public ResponseEntity<GameDTO> getByID(@PathVariable String id) {
+    public ResponseEntity<GameDTO> getByID(@PathVariable String id) throws EntityNotFoundException {
         return new ResponseEntity<>(service.getGame(id),HttpStatus.OK);
     }
 

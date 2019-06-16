@@ -10,12 +10,15 @@ public class Game {
     @Id
     private String id;
     private List<Colour> colour;
+    private Boolean resolved;
 
     public Game() {
+        this.resolved = false;
     }
 
     public Game(List<Colour> colour) {
         this.colour = colour;
+        this.resolved = false;
     }
 
     public String getId() {
@@ -32,5 +35,13 @@ public class Game {
 
     public void setColour(List<Colour> colour) {
         this.colour = colour;
+    }
+
+    public Boolean getResolved() {
+        return resolved;
+    }
+
+    public void setResolved(Boolean resolved) {
+        this.resolved = resolved;
     }
 }

@@ -5,10 +5,14 @@ import com.test.buttons.dto.FeedbackCodeDTO;
 import com.test.buttons.dto.GameDTO;
 import com.test.buttons.dto.CheckCodeDTO;
 import com.test.buttons.enums.Colour;
+import com.test.buttons.exception.EntityNotFoundException;
 import com.test.buttons.model.Game;
 import com.test.buttons.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+
+import java.util.Optional;
 
 @Service
 public class GameService implements IGameService {
@@ -24,15 +28,17 @@ public class GameService implements IGameService {
 
     @Override
     public GameDTO createGame() {
-        removeOldGame();
-
         Game game = new Game(Colour.randomColourList());
         return converter.toDto(repository.save(game));
     }
 
     @Override
-    public GameDTO getGame(String id) {
-        return converter.toDto(repository.findOne(id));
+    public GameDTO getGame(String id) throws EntityNotFoundException {
+        Optional<Game> game = repository.findByIdAndResolved(id,false);
+        if(game.isPresent())
+            return converter.toDto(game.get());
+        else throw new EntityNotFoundException(id);
+
     }
 
     @Override
@@ -44,10 +50,12 @@ public class GameService implements IGameService {
                         game.getColour(),
                         checkCodeDTO.getColour()
                 ));
+
+        if(Colour.isResolved(feedbackCodeDTO.getFlags())) {
+            game.setResolved(true);
+            repository.save(game);
+        }
         return feedbackCodeDTO;
     }
 
-    private void removeOldGame() {
-        repository.deleteAll();
-    }
 }
