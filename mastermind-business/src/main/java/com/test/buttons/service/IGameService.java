@@ -10,4 +10,7 @@ public interface IGameService {
      */
     GameDTO createGame();
 
+
+    GameDTO getGame(String id);
+
 }

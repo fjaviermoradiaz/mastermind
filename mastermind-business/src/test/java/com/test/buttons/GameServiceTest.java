@@ -14,6 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -26,14 +27,16 @@ public class GameServiceTest {
     private GameService gameService;
     private Game game;
     private GameDTO gameDTO;
+    private String ID = "MASTERMINDID";
 
     @Before
     public void setUp() {
         gameService = new GameService(repository,converter);
         game = new Game((Colour[]) Colour.randomColourList().toArray());
-
+        game.setId(ID);
         gameDTO = new GameDTO();
         gameDTO.setColour(game.getColour());
+        gameDTO.setId(ID);
     }
 
     @Test
@@ -44,5 +47,15 @@ public class GameServiceTest {
 
         Assert.assertNotNull(gameDTO);
         Assert.assertThat(gameDTO.getColour(), IsEqual.equalTo(this.game.getColour()));
+    }
+
+    @Test
+    public void getGame() {
+        when(gameService.getGame(anyString())).thenReturn(gameDTO);
+
+        GameDTO gameDTO = gameService.getGame(ID);
+
+        Assert.assertNotNull(gameDTO);
+        Assert.assertThat(gameDTO.getId(), IsEqual.equalTo(this.game.getId()));
     }
 }
