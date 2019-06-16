@@ -23,13 +23,14 @@ public class GameService implements IGameService {
 
     private GameRepository repository;
     private GameConverter converter;
+
+    @Autowired
     private GameHistoryRepository gameHistoryRepository;
 
     @Autowired
-    public GameService(GameRepository gameRepository, GameConverter gameConverter, GameHistoryRepository gameHistoryRepository) {
+    public GameService(GameRepository gameRepository, GameConverter gameConverter) {
         this.repository = gameRepository;
         this.converter = gameConverter;
-        this.gameHistoryRepository = gameHistoryRepository;
     }
 
     @Override
@@ -48,8 +49,12 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public FeedbackCodeDTO validateCode(CheckCodeDTO checkCodeDTO) {
+    public FeedbackCodeDTO validateCode(CheckCodeDTO checkCodeDTO) throws EntityNotFoundException {
         Game game = repository.findOne(checkCodeDTO.getId());
+
+        if(game == null)
+            throw new EntityNotFoundException(checkCodeDTO.getId());
+
         FeedbackCodeDTO feedbackCodeDTO = new FeedbackCodeDTO(
                 checkCodeDTO.getId(),
                 Colour.checkParamList(

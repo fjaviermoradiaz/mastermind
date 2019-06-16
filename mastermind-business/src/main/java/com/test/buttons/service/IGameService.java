@@ -28,6 +28,6 @@ public interface IGameService {
      * @param code
      * @return FeedbackCodeDTO
      */
-    FeedbackCodeDTO validateCode(CheckCodeDTO checkCodeDTO);
+    FeedbackCodeDTO validateCode(CheckCodeDTO checkCodeDTO) throws EntityNotFoundException;
 
 }
