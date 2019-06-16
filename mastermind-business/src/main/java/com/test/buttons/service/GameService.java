@@ -7,11 +7,15 @@ import com.test.buttons.dto.CheckCodeDTO;
 import com.test.buttons.enums.Colour;
 import com.test.buttons.exception.EntityNotFoundException;
 import com.test.buttons.model.Game;
+import com.test.buttons.model.GameHistory;
+import com.test.buttons.repository.GameHistoryRepository;
 import com.test.buttons.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,11 +23,13 @@ public class GameService implements IGameService {
 
     private GameRepository repository;
     private GameConverter converter;
+    private GameHistoryRepository gameHistoryRepository;
 
     @Autowired
-    public GameService(GameRepository gameRepository, GameConverter gameConverter) {
+    public GameService(GameRepository gameRepository, GameConverter gameConverter, GameHistoryRepository gameHistoryRepository) {
         this.repository = gameRepository;
         this.converter = gameConverter;
+        this.gameHistoryRepository = gameHistoryRepository;
     }
 
     @Override
@@ -55,7 +61,22 @@ public class GameService implements IGameService {
             game.setResolved(true);
             repository.save(game);
         }
+
+        saveHistory(checkCodeDTO,feedbackCodeDTO.getFlags());
+
         return feedbackCodeDTO;
     }
+
+    private void saveHistory(CheckCodeDTO checkCodeDTO, List<String> flags) {
+        GameHistory gameHistory = new GameHistory();
+        gameHistory.setAttemptDate(new Date());
+        gameHistory.setAttempt(checkCodeDTO.getColour());
+        gameHistory.setGame(checkCodeDTO.getId());
+        gameHistory.setFlag(flags);
+
+        gameHistoryRepository.save(gameHistory);
+    }
+
+
 
 }
