@@ -1,15 +1,18 @@
 package com.test.buttons.controller;
 
-import com.test.buttons.converter.GameConverter;
 import com.test.buttons.dto.GameDTO;
+import com.test.buttons.dto.CheckCodeDTO;
+import com.test.buttons.dto.FeedbackCodeDTO;
 import com.test.buttons.service.GameService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.Valid;
 
+@Api(value = "/game", description = "Operations about mastermind game")
 @RestController
 @RequestMapping(value = "/game")
 public class GameController {
@@ -22,6 +25,7 @@ public class GameController {
         this.service = gameService;
     }
 
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<GameDTO> createGame() {
@@ -32,5 +36,11 @@ public class GameController {
     @ResponseBody
     public ResponseEntity<GameDTO> getByID(@PathVariable String id) {
         return new ResponseEntity<>(service.getGame(id),HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/check")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<FeedbackCodeDTO> validateCode(@RequestBody @Valid CheckCodeDTO checkCodeDTO) {
+        return new ResponseEntity<>(service.validateCode(checkCodeDTO), HttpStatus.OK);
     }
 }

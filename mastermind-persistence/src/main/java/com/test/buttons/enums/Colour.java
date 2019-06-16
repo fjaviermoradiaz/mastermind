@@ -1,20 +1,19 @@
 package com.test.buttons.enums;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public enum Colour
 {
     BLUE("BLUE"),
     YELLOW("YELLOW"),
     GREEN("GREEN"),
-    PINK("PINK"),
+    RED("RED"),
     WHITE("WHITE"),
     ORANGE("ORANGE");
 
     private String colour;
+    private static String RED_FLAG = "RED";
+    private static String WHITE_FLAG = "WHITE";
 
     Colour(String colour) {
         this.colour = colour;
@@ -37,5 +36,21 @@ public enum Colour
                              VALUES.get(RANDOM.nextInt(SIZE)),
                              VALUES.get(RANDOM.nextInt(SIZE)));
 
+    }
+
+    public static List<String> checkParamList(List<Colour> originalList, List<Colour> paramList) {
+        List<String> flagList = new ArrayList<>();
+
+        int index = 0;
+        for(Colour colourElement : paramList) {
+            if(colourElement.equals(originalList.get(index))) {
+                flagList.add(RED_FLAG);
+            } else if(originalList.contains(colourElement)){
+                flagList.add(WHITE_FLAG);
+            }
+            index++;
+        }
+
+        return flagList;
     }
 }
