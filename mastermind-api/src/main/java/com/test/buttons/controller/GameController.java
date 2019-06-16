@@ -41,7 +41,8 @@ public class GameController {
 
     @PostMapping(value = "/check")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<FeedbackCodeDTO> validateCode(@RequestBody @Valid CheckCodeDTO checkCodeDTO) {
+    public ResponseEntity<FeedbackCodeDTO> validateCode(@RequestBody @Valid CheckCodeDTO checkCodeDTO)
+            throws EntityNotFoundException {
         return new ResponseEntity<>(service.validateCode(checkCodeDTO), HttpStatus.OK);
     }
 }

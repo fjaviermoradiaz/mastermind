@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
+
 public interface GameHistoryRepository extends MongoRepository<GameHistory, String> {
 
     List<GameHistory> findAllByGame(String game);

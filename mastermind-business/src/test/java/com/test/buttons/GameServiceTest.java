@@ -3,6 +3,7 @@ package com.test.buttons;
 import com.test.buttons.converter.GameConverter;
 import com.test.buttons.dto.GameDTO;
 import com.test.buttons.enums.Colour;
+import com.test.buttons.exception.EntityNotFoundException;
 import com.test.buttons.model.Game;
 import com.test.buttons.repository.GameRepository;
 import com.test.buttons.service.GameService;
@@ -17,6 +18,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
@@ -31,7 +33,7 @@ public class GameServiceTest {
     private GameService gameService;
     private Game game;
     private GameDTO gameDTO;
-    private String ID = "MASTERMINDID";
+    private String ID = "MASTERMIND";
     private static String RED_FLAG = "RED";
     private static String WHITE_FLAG = "WHITE";
 
@@ -50,14 +52,15 @@ public class GameServiceTest {
         when(gameService.createGame()).thenReturn(gameDTO);
 
         GameDTO gameDTO = gameService.createGame();
-
+        ID = gameDTO.getId();
         Assert.assertNotNull(gameDTO);
         Assert.assertThat(gameDTO.getColour(), IsEqual.equalTo(this.game.getColour()));
     }
 
     @Test
-    public void getGame() {
-        when(gameService.getGame(anyString())).thenReturn(gameDTO);
+    public void getGame() throws EntityNotFoundException {
+        when(repository.findByIdAndResolved(ID,false)).thenReturn(Optional.of(game));
+        when(gameService.getGame(ID)).thenReturn(gameDTO);
 
         GameDTO gameDTO = gameService.getGame(ID);
 
