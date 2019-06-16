@@ -1,5 +1,10 @@
 package com.test.buttons.enums;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+
 public enum Colour
 {
     BLUE("BLUE"),
@@ -17,5 +22,20 @@ public enum Colour
 
     public String getColour() {
         return colour;
+    }
+
+    private static final List<Colour> VALUES =
+            Collections.unmodifiableList(Arrays.asList(values()));
+
+    private static final int SIZE = VALUES.size();
+    private static final Random RANDOM = new Random();
+
+    public static List<Colour> randomColourList()  {
+
+        return Arrays.asList(VALUES.get(RANDOM.nextInt(SIZE)),
+                             VALUES.get(RANDOM.nextInt(SIZE)),
+                             VALUES.get(RANDOM.nextInt(SIZE)),
+                             VALUES.get(RANDOM.nextInt(SIZE)));
+
     }
 }
