@@ -28,6 +28,11 @@ public class GameService implements IGameService {
         return converter.toDto(repository.save(game));
     }
 
+    @Override
+    public GameDTO getGame(String id) {
+        return converter.toDto(repository.findOne(id));
+    }
+
     private void removeOldGame() {
         repository.deleteAll();
     }

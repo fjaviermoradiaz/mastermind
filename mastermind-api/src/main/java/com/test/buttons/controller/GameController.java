@@ -27,4 +27,10 @@ public class GameController {
     public ResponseEntity<GameDTO> createGame() {
         return new ResponseEntity<>(service.createGame(), HttpStatus.CREATED);
     }
+
+    @GetMapping(value = "/{id}")
+    @ResponseBody
+    public ResponseEntity<GameDTO> getByID(@PathVariable String id) {
+        return new ResponseEntity<>(service.getGame(id),HttpStatus.OK);
+    }
 }
