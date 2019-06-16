@@ -2,13 +2,20 @@ package com.test.buttons.dto;
 
 import com.test.buttons.enums.Colour;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.List;
+
 public class GameDTO {
 
+    @NotNull
     private String id;
-    private Colour[] colour;
-    private String[] key;
 
-    public Colour[] getColour() {
+    @NotNull
+    @Size(min = 4, max = 4)
+    private List<Colour> colour;
+
+    public List<Colour> getColour() {
         return colour;
     }
 
@@ -20,15 +27,8 @@ public class GameDTO {
         this.id = id;
     }
 
-    public void setColour(Colour[] colour) {
+    public void setColour(List<Colour> colour) {
         this.colour = colour;
     }
 
-    public String[] getKey() {
-        return key;
-    }
-
-    public void setKey(String[] key) {
-        this.key = key;
-    }
 }

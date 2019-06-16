@@ -1,6 +1,8 @@
 package com.test.buttons.service;
 
+import com.test.buttons.dto.FeedbackCodeDTO;
 import com.test.buttons.dto.GameDTO;
+import com.test.buttons.dto.CheckCodeDTO;
 
 public interface IGameService {
 
@@ -11,6 +13,20 @@ public interface IGameService {
     GameDTO createGame();
 
 
+    /**
+     * Get game by id
+     * @param id
+     * @return GameDTO
+     */
     GameDTO getGame(String id);
+
+
+    /**
+     * Validate code with game color list
+     * @param gameId
+     * @param code
+     * @return FeedbackCodeDTO
+     */
+    FeedbackCodeDTO validateCode(CheckCodeDTO checkCodeDTO);
 
 }
