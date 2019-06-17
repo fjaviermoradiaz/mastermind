@@ -1,0 +1,26 @@
+version: '3'
+services:
+  mastermind-mongo:
+    container_name: mastermindmongo
+    image: "mongo:latest"
+    hostname: mastermindmongo
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data_core/mongo:/data/db
+
+  mastermind-api:
+    container_name: mastermind_api
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      - ENVIRONMENT=docker
+      - MONGODB_URI=mongodb://mastermind-mongo:27017/mastermindmongo
+      - SERVER_PORT=8080
+      - MONGODB_STATUS_HOST=mastermind-mongo
+      - MONGODB_STATUS_PORT=27017
+    depends_on:
+      - mastermind-mongo
+    links:
+      - mastermind-mongo
