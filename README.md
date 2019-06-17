@@ -27,11 +27,6 @@ or
 ```sh
 $ docker-compose down
 ```
-
-```sh
-$ docker pull fjaviermoradiaz/birdwatching:latest
-$ docker run -p 8080:8080 fjaviermoradiaz/birdwatching:latest
-```
 Database mongo url: 
 _`mongodb://mastermind-mongo:27017/mastermindmongo`_
 
@@ -41,8 +36,10 @@ You can use swagger api to see endpoint and try it.
 
 Endpoints:
 
-`http://localhost:8080/game`  #create new game
-`http://localhost:8080/game/check`  #to check colour sequence
-`http://localhost:8080/game/{id}`  #get game info
-`http://localhost:8080/game/history/{game}`  #get game history
+ - Create new game -> `http://localhost:8080/game`  
+ - Check colour sequence -> `http://localhost:8080/game/check`  
+ - Get game info -> `http://localhost:8080/game/{id}`  
+ - Get game history -> `http://localhost:8080/game/history/{game}`
+
+File **Mastermind.postman_collection.json** contains postman example to test api.
 

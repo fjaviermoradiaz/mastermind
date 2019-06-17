@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "fbac6a45-8c79-45c0-a901-a1a3cc1a1700",
+		"name": "Mastermind",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getGame",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/game/5d0758e0a771c81157170dd3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"game",
+						"5d0758e0a771c81157170dd3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getHistoryGame",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/game/history/5d075be2a771c81227129911",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"game",
+						"history",
+						"5d075be2a771c81227129911"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getGameList",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/game/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"game",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createGame",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/game/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"game",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "checkGame",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"colour\": [\n    \"WHITE\",\n    \"RED\",\n    \"BLUE\",\n    \"YELLOW\"\n  ],\n  \"id\": \"5d075be2a771c81227129911\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/game/check",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"game",
+						"check"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
