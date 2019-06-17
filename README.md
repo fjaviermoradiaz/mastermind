@@ -38,7 +38,8 @@ Endpoints:
 
  - Create new game -> `http://localhost:8080/game`  
  - Check colour sequence -> `http://localhost:8080/game/check`  
- - Get game info -> `http://localhost:8080/game/{id}`  
+ - Get game info -> `http://localhost:8080/game/{id}`
+ - Get game list (GET) -> `http://localhost:8080/game`  
  - Get game history -> `http://localhost:8080/game/history/{game}`
 
 File **Mastermind.postman_collection.json** contains postman example to test api.
