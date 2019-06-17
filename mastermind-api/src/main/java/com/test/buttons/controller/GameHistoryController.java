@@ -33,7 +33,7 @@ public class GameHistoryController {
 
     @GetMapping(value = "/{game}")
     @ResponseBody
-    public ResponseEntity<List<GameHistoryDTO>> getByID(@PathVariable String game) {
+    public ResponseEntity<List<GameHistoryDTO>> gethistoryByGame(@PathVariable String game) {
         return new ResponseEntity<>(service.getHistoryGame(game),HttpStatus.OK);
     }
 }
