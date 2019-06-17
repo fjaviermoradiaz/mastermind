@@ -5,6 +5,8 @@ import com.test.buttons.dto.GameDTO;
 import com.test.buttons.dto.CheckCodeDTO;
 import com.test.buttons.exception.EntityNotFoundException;
 
+import java.util.List;
+
 public interface IGameService {
 
     /**
@@ -30,4 +32,9 @@ public interface IGameService {
      */
     FeedbackCodeDTO validateCode(CheckCodeDTO checkCodeDTO) throws EntityNotFoundException;
 
+    /**
+     * Get game list
+     * @return
+     */
+    List<GameDTO> getGameList();
 }
