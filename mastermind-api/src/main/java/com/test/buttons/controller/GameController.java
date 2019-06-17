@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Api(value = "/game", description = "Operations about mastermind game")
 @RestController
@@ -37,6 +38,12 @@ public class GameController {
     @ResponseBody
     public ResponseEntity<GameDTO> getByID(@PathVariable String id) throws EntityNotFoundException {
         return new ResponseEntity<>(service.getGame(id),HttpStatus.OK);
+    }
+
+    @GetMapping
+    @ResponseBody
+    public ResponseEntity<List<GameDTO>> getList() {
+        return new ResponseEntity<>(service.getGameList(),HttpStatus.OK);
     }
 
     @PostMapping(value = "/check")

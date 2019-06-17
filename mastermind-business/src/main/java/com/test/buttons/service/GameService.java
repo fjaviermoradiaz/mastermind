@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class GameService implements IGameService {
@@ -80,6 +81,13 @@ public class GameService implements IGameService {
         saveHistory(checkCodeDTO,feedbackCodeDTO.getFlags());
 
         return feedbackCodeDTO;
+    }
+
+    @Override
+    public List<GameDTO> getGameList() {
+        return repository.findAllByResolved(false).stream()
+                .map(converter::toDto)
+                .collect(Collectors.toList());
     }
 
     private void saveHistory(CheckCodeDTO checkCodeDTO, List<String> flags) {
