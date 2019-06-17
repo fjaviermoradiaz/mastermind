@@ -12,7 +12,8 @@ import com.test.buttons.repository.GameHistoryRepository;
 import com.test.buttons.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.List;
@@ -20,6 +21,8 @@ import java.util.Optional;
 
 @Service
 public class GameService implements IGameService {
+
+    private static final Logger logger = LoggerFactory.getLogger(GameService.class);
 
     private GameRepository repository;
     private GameConverter converter;
@@ -44,7 +47,11 @@ public class GameService implements IGameService {
         Optional<Game> game = repository.findByIdAndResolved(id,false);
         if(game.isPresent())
             return converter.toDto(game.get());
-        else throw new EntityNotFoundException(id);
+        else {
+            logger.error("Entity not found with id {}",id);
+
+            throw new EntityNotFoundException(id);
+        }
 
     }
 
@@ -52,8 +59,11 @@ public class GameService implements IGameService {
     public FeedbackCodeDTO validateCode(CheckCodeDTO checkCodeDTO) throws EntityNotFoundException {
         Game game = repository.findOne(checkCodeDTO.getId());
 
-        if(game == null)
+        if(game == null) {
+            logger.error("Game not found with id {}",checkCodeDTO.getId());
             throw new EntityNotFoundException(checkCodeDTO.getId());
+        }
+
 
         FeedbackCodeDTO feedbackCodeDTO = new FeedbackCodeDTO(
                 checkCodeDTO.getId(),
