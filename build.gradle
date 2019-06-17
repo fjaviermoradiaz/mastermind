@@ -27,3 +27,40 @@ allprojects{
     sourceCompatibility = 1.8
     targetCompatibility = 1.8
 }
+
+task buildContainer() {
+    dependsOn ':mastermind-api:build'
+    group = 'Docker'
+    description = 'Create containers'
+
+    doLast {
+        exec {
+            executable 'docker-compose'
+            args 'build'
+        }
+    }
+}
+
+task upContainers() {
+    group = 'Docker'
+    description = 'Up containers'
+
+    doLast {
+        exec {
+            executable 'docker-compose'
+            args 'up', '-d'
+        }
+    }
+}
+
+task downContainers() {
+    group = 'Docker'
+    description = 'Remove containers'
+
+    doLast {
+        exec {
+            executable 'docker-compose'
+            args 'down'
+        }
+    }
+}
